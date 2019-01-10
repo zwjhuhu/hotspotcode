@@ -150,7 +150,7 @@ public class MyMonitoredVmUtil {
 
 	// Index of the sun.rt.jvmCapabilities counter
 	private static int IS_ATTACHABLE = 0;
-	private static int IS_KERNEL_VM = 1;
+	//private static int IS_KERNEL_VM = 1;
 
 	/**
 	 * 获得指定虚拟机支持的所有监视器（Monitor:StringMonitor）
@@ -158,7 +158,7 @@ public class MyMonitoredVmUtil {
 	 * @param vm
 	 *            the target MonitoredVm
 	 */
-	public static List listMonitors(MonitoredVm vm) throws MonitorException {
+	public static List<Monitor> listMonitors(MonitoredVm vm) throws MonitorException {
 		List<Monitor> listMonitors = vm.findByPattern(".+");
 		for (int i = 0; i < listMonitors.size(); i++) {
 			Monitor m = listMonitors.get(i);

@@ -42,8 +42,7 @@ public class UseSystemDictionary extends Tool {
 	public static void main(String[] args) {
 		// args - 传递pid
 		UseSystemDictionary usd = new UseSystemDictionary();
-		usd.start(args);
-		usd.stop();
+		usd.execute(new String[] {"7580"});
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class UseSystemDictionary extends Tool {
 	 */
 	public static synchronized void listInstanceKlasses(PrintStream tty) {
 		// 获得系统字典并得到所有已加载类
-		final Vector tmp = new Vector();
+		final Vector<InstanceKlass> tmp = new Vector<>();
 		SystemDictionary sysDict = VM.getVM().getSystemDictionary();
 		sysDict.classesDo(new SystemDictionary.ClassVisitor() {
 			public void visit(Klass k) {
@@ -84,10 +83,8 @@ public class UseSystemDictionary extends Tool {
 		Object[] tmpArray = tmp.toArray();
 		klasses = new InstanceKlass[tmpArray.length];
 		System.arraycopy(tmpArray, 0, klasses, 0, tmpArray.length);
-		Arrays.sort(klasses, new Comparator() {
-			public int compare(Object o1, Object o2) {
-				InstanceKlass k1 = (InstanceKlass) o1;
-				InstanceKlass k2 = (InstanceKlass) o2;
+		Arrays.sort(klasses, new Comparator<InstanceKlass>() {
+			public int compare(InstanceKlass k1, InstanceKlass k2) {
 				Symbol s1 = k1.getName();
 				Symbol s2 = k2.getName();
 				return s1.asString().compareTo(s2.asString());
@@ -96,7 +93,7 @@ public class UseSystemDictionary extends Tool {
 
 		// 输出至tty
 		Symbol s = null;
-		Symbol s2 = null;
+		//Symbol s2 = null;
 		for (InstanceKlass ik : klasses) {
 			s = ik.getName();
 			s.printValueOn(tty);
@@ -111,7 +108,7 @@ public class UseSystemDictionary extends Tool {
 			return klasses;
 		}
 
-		final Vector tmp = new Vector();
+		final Vector<InstanceKlass> tmp = new Vector<>();
 		SystemDictionary sysDict = VM.getVM().getSystemDictionary();
 		sysDict.classesDo(new SystemDictionary.ClassVisitor() {
 			public void visit(Klass k) {
@@ -125,10 +122,8 @@ public class UseSystemDictionary extends Tool {
 		Object[] tmpArray = tmp.toArray();
 		klasses = new InstanceKlass[tmpArray.length];
 		System.arraycopy(tmpArray, 0, klasses, 0, tmpArray.length);
-		Arrays.sort(klasses, new Comparator() {
-			public int compare(Object o1, Object o2) {
-				InstanceKlass k1 = (InstanceKlass) o1;
-				InstanceKlass k2 = (InstanceKlass) o2;
+		Arrays.sort(klasses, new Comparator<InstanceKlass>() {
+			public int compare(InstanceKlass k1, InstanceKlass k2) {
 				Symbol s1 = k1.getName();
 				Symbol s2 = k2.getName();
 				return s1.asString().compareTo(s2.asString());
@@ -141,7 +136,7 @@ public class UseSystemDictionary extends Tool {
 		namePart = namePart.replace('.', '/');
 		InstanceKlass[] tmpKlasses = getAllInstanceKlasses();
 
-		Vector tmp = new Vector();
+		Vector<InstanceKlass> tmp = new Vector<>();
 		for (int i = 0; i < tmpKlasses.length; i++) {
 			String name = tmpKlasses[i].getName().asString();
 			if (name.indexOf(namePart) != -1) {
@@ -164,7 +159,7 @@ public class UseSystemDictionary extends Tool {
 			return (InstanceKlass) klass;
 		}
 
-		klass = sysDict.find(className, sysDict.javaSystemLoader(), null);
+		klass = sysDict.find(className, SystemDictionary.javaSystemLoader(), null);
 		if (klass != null) {
 			return (InstanceKlass) klass;
 		}

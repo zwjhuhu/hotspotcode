@@ -12,10 +12,9 @@ public class ConstantPoolTestCase {
 	static final String c1c1c1 = "This is a ConstantPool Test Case.";
 
 	public static void main(String[] args) {
-		ConstantPoolTestCase cptc = new ConstantPoolTestCase();
-		System.out.println(cptc.a1a1a1);
-		System.out.println(cptc.b2b1b1);
-		System.out.println(cptc.c1c1c1);
+		System.out.println(ConstantPoolTestCase.a1a1a1);
+		System.out.println(ConstantPoolTestCase.b2b1b1);
+		System.out.println(ConstantPoolTestCase.c1c1c1);
 	}
 
 }

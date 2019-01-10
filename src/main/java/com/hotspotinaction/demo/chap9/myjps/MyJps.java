@@ -43,9 +43,9 @@ public class MyJps {
 			MonitoredHost monitoredHost = MonitoredHost.getMonitoredHost(hostId);
 
 			// 列出目标系统上所有活跃的JVM
-			Set jvms = monitoredHost.activeVms();
+			Set<Integer> jvms = monitoredHost.activeVms();
 
-			for (Iterator j = jvms.iterator(); j.hasNext(); /* empty */) {
+			for (Iterator<Integer> j = jvms.iterator(); j.hasNext(); /* empty */) {
 				StringBuilder output = new StringBuilder();
 				Throwable lastError = null;
 

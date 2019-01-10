@@ -22,8 +22,7 @@ public class MyWatchConstantPool extends Tool {
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		MyWatchConstantPool test = new MyWatchConstantPool();
-		test.start(new String[] {"5360"});
-		test.stop();
+		test.execute(new String[] {"2920"});
 	}
 
 	@Override

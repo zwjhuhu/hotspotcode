@@ -125,8 +125,7 @@ public class FrameDump extends Tool {
 	 */
 	public static void main(String[] args) {
 		FrameDump tool = new FrameDump();
-		tool.start(args);
-		tool.stop();
+		tool.execute(args);
 	}
 
 }
